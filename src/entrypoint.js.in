@@ -1,0 +1,2 @@
+#!@NODE@
+process.exit(require("../@SCRIPT@/@MAIN@").default(process.argv.slice(2)));

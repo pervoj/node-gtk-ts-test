@@ -1,7 +1,11 @@
-project('node-gtk-ts-test',
+project(
+  'node-gtk-ts-test',
   version: '0.0.1',
   meson_version: '>= 0.62.0',
-  default_options: [ 'warning_level=2', 'werror=false', ],
+  default_options: [
+    'warning_level=2',
+    'werror=false',
+  ],
 )
 
 app_id = 'cz.pervoj.NodeGtkTsTest'
@@ -9,6 +13,7 @@ app_id = 'cz.pervoj.NodeGtkTsTest'
 script_dir = get_option('datadir') / meson.project_name() / 'script'
 resources_dir = get_option('datadir') / meson.project_name() / 'resources'
 
+i18n = import('i18n')
 gnome = import('gnome')
 
 pm = find_program('npm', required: true)
@@ -18,8 +23,9 @@ pm_command = [pm, pm_args]
 blueprint = find_program('blueprint-compiler')
 
 pm_deps = custom_target(
-  command: [ pm_command, 'install', '--offline' ],
-  output: 'dependencies'
+  command: [pm_command, 'install', '--offline'],
+  output: 'dependencies',
 )
 
 subdir('src')
+subdir('po')

@@ -10,10 +10,8 @@
     "@girs/node-gobject-2.0": "^2.78.0-3.3.0",
     "@girs/node-gtk": "^3.3.0",
     "@girs/node-gtk-4.0": "^4.12.5-3.3.0",
-    "detect-character-encoding": "^0.9.0",
-    "fast-xml-parser": "^4.3.6",
-    "gettext.js": "^2.0.2",
     "glob": "^10.3.12",
+    "libintl": "^1.5.0",
     "node-gtk": "^0.14.0"
   },
   "devDependencies": {

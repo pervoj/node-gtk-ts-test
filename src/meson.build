@@ -21,10 +21,17 @@ foreach blueprint_file : blueprints_src
   blueprints_ui += blueprint_file.replace('.blp', '.ui')
 endforeach
 
-blueprints = custom_target('blueprints',
+blueprints = custom_target(
+  'blueprints',
   input: blueprints_src,
   output: blueprints_ui,
-  command: [blueprint, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
+  command: [
+    blueprint,
+    'batch-compile',
+    '@OUTDIR@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
 )
 
 gnome.compile_resources(
@@ -39,14 +46,30 @@ gnome.compile_resources(
 custom_target(
   build_by_default: true,
   command: [
-    pm_command, 'exec', '--', 'esbuild',
-    '--platform=node', '--format=cjs', '--minify',
-    '--outdir=' + meson.project_build_root() / '@OUTDIR@',
+    pm_command,
+    'exec',
+    '--', 'esbuild',
+    '--platform=node',
+    '--format=cjs',
+    '--minify', '--outdir=' + meson.project_build_root() / '@OUTDIR@',
     '@INPUT@',
   ],
   depends: pm_deps,
   input: sources,
   output: outputs,
+  install: true,
+  install_dir: script_dir,
+)
+
+const_conf = configuration_data()
+const_conf.set('APP_ID', app_id)
+const_conf.set('VERSION', meson.project_version())
+const_conf.set('GETTEXT_PACKAGE', meson.project_name())
+
+configure_file(
+  input: 'constants.js',
+  output: 'constants.js',
+  configuration: const_conf,
   install: true,
   install_dir: script_dir,
 )

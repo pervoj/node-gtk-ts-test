@@ -10,8 +10,14 @@ export default class MainWindow extends Adw.ApplicationWindow {
     resource: "/cz/pervoj/NodeGtkTsTest/win.ui",
   });
 
+  _button: Gtk.Button = this._template.child("button");
+
   constructor(app: Adw.Application) {
     super({ application: app });
+
+    this._button.on("clicked", () => {
+      console.log("The button was pressed!");
+    });
   }
 }
 

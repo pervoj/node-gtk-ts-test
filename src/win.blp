@@ -1,8 +1,8 @@
 using Gtk 4.0;
 using Adw 1;
 
-template MainWindow : Adw.ApplicationWindow {
-  title: "Hello, World!";
+template $MainWindow: Adw.ApplicationWindow {
+  title: _("Hello, World!");
   default-width: 800;
   default-height: 600;
 
@@ -11,11 +11,30 @@ template MainWindow : Adw.ApplicationWindow {
 
     Adw.HeaderBar {}
 
-    Gtk.Label {
-      styles ["title-1"]
-      label: "Hello, World!";
+    Gtk.Box {
+      orientation: vertical;
+      spacing: 36;
       vexpand: true;
       valign: center;
+
+      Gtk.Label {
+        styles [
+          "title-1"
+        ]
+
+        label: _("Hello, World!");
+      }
+
+      Gtk.Button button {
+        styles [
+          "pill",
+          "suggested-action"
+        ]
+
+        halign: center;
+        use-underline: true;
+        label: _("_Press!");
+      }
     }
   }
 }
